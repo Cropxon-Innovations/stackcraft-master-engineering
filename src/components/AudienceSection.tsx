@@ -9,7 +9,7 @@ const audiences = [
 
 const AudienceSection = () => {
   return (
-    <section id="about" className="py-24 sm:py-32">
+    <section id="about" className="py-16 sm:py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-10 tracking-tight text-center">

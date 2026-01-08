@@ -1,6 +1,6 @@
 const FlowSection = () => {
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-12 sm:py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto text-center">
           {/* Monospace flow diagram */}
