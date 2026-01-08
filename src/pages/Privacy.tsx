@@ -1,9 +1,16 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 
 const Privacy = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Privacy Policy"
+        description="StackCraft privacy policy. Learn how we collect, use, and protect your personal information."
+        keywords="privacy policy, data protection, personal information"
+        canonicalUrl="https://stackcraft.dev/privacy"
+      />
       <Navbar />
 
       <main className="pt-24 pb-16">

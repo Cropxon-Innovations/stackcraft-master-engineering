@@ -1,9 +1,16 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 
 const Terms = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Terms of Service"
+        description="StackCraft terms of service. Read our terms and conditions for using the platform."
+        keywords="terms of service, terms and conditions, user agreement"
+        canonicalUrl="https://stackcraft.dev/terms"
+      />
       <Navbar />
 
       <main className="pt-24 pb-16">

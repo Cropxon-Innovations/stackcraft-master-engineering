@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import { 
@@ -85,6 +86,12 @@ const itemVariants = {
 const Platform = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Platform — Structured Learning for Production Engineering"
+        description="Master production-grade engineering with structured learning paths, interactive content, AI-powered assistance, and a supportive community of engineers."
+        keywords="engineering learning platform, structured learning paths, backend engineer training, software architecture courses, technical education"
+        canonicalUrl="https://stackcraft.dev/platform"
+      />
       <Navbar />
 
       <main className="pt-24 pb-16">

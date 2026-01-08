@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import { 
@@ -99,6 +100,12 @@ const itemVariants = {
 const Playbooks = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Engineering Playbooks — Deep Technical Guides"
+        description="Production-tested engineering playbooks covering .NET, API design, system architecture, DevOps, and cloud infrastructure. Battle-tested patterns from real engineering teams."
+        keywords=".NET engineering, API design, system architecture, DevOps playbooks, cloud infrastructure, backend engineering, microservices patterns"
+        canonicalUrl="https://stackcraft.dev/playbooks"
+      />
       <Navbar />
 
       <main className="pt-24 pb-16">

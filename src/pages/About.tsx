@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import { BookOpen, Target, Eye, Heart, Zap } from 'lucide-react';
 
@@ -29,6 +30,12 @@ const values = [
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="About StackCraft — Our Mission and Story"
+        description="Learn about StackCraft's mission to build the engineering knowledge platform we wished existed. Deep focus on production-grade patterns and real-world engineering."
+        keywords="about stackcraft, engineering education, software engineering mission, technical learning platform"
+        canonicalUrl="https://stackcraft.dev/about"
+      />
       <Navbar />
 
       <main className="pt-24 pb-16">
