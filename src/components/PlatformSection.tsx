@@ -30,7 +30,7 @@ const features = [
 
 const PlatformSection = () => {
   return (
-    <section id="platform" className="py-24 sm:py-32 relative">
+    <section id="platform" className="py-16 sm:py-20 relative">
       {/* Subtle background accent */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent pointer-events-none" />
       

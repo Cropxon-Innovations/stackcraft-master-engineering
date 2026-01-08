@@ -3,7 +3,7 @@ import { PenLine } from 'lucide-react';
 
 const CommunitySection = () => {
   return (
-    <section id="community" className="py-24 sm:py-32 relative">
+    <section id="community" className="py-16 sm:py-20 relative">
       {/* Subtle background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-card/30 to-transparent pointer-events-none" />
       
