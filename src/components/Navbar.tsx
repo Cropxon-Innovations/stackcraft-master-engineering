@@ -31,7 +31,7 @@ const Navbar = () => {
     { label: 'Playbooks', href: 'https://blog.stackcraft.io', type: 'external' },
     { label: 'Platform', href: '/#platform', type: 'scroll', target: 'platform' },
     { label: 'Roadmap', href: '/roadmap', type: 'link' },
-    { label: 'Learning', href: '#', type: 'disabled', badge: 'Coming Soon' },
+    { label: 'About', href: '/about', type: 'link' },
     { label: 'Community', href: '/#community', type: 'scroll', target: 'community' },
   ];
 
