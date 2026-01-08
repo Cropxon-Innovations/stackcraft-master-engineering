@@ -3,18 +3,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { BookOpen, Rocket } from 'lucide-react';
 import AnimatedLogo from '@/components/AnimatedLogo';
+import NewsletterSignup from '@/components/NewsletterSignup';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const concepts = [
-  { label: 'C# & .NET Foundations', color: 'text-emerald-500 dark:text-emerald-400' },
-  { label: 'API & Backend Engineering', color: 'text-blue-500 dark:text-blue-400' },
-  { label: 'Cloud & DevOps', color: 'text-violet-500 dark:text-violet-400' },
-  { label: 'Microservices Architecture', color: 'text-amber-500 dark:text-amber-400' },
-  { label: 'AI-Ready Systems', color: 'text-rose-500 dark:text-rose-400' },
+  { label: 'C# & .NET Foundations', color: 'text-emerald-600 dark:text-emerald-400' },
+  { label: 'API & Backend Engineering', color: 'text-blue-600 dark:text-blue-400' },
+  { label: 'Cloud & DevOps', color: 'text-violet-600 dark:text-violet-400' },
+  { label: 'Microservices Architecture', color: 'text-amber-600 dark:text-amber-400' },
+  { label: 'AI-Ready Systems', color: 'text-rose-600 dark:text-rose-400' },
 ];
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (isPaused) return;
@@ -34,7 +37,7 @@ const HeroSection = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.15,
-        delayChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
@@ -52,20 +55,10 @@ const HeroSection = () => {
     },
   };
 
-  const panelVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: (i: number) => ({
-      opacity: [0.1, 0.3, 0.1],
-      y: [20, 0, -10],
-      transition: {
-        duration: 4,
-        delay: i * 0.8,
-        repeat: Infinity,
-        repeatType: 'reverse' as const,
-        ease: 'easeInOut' as const,
-      },
-    }),
-  };
+  // Panel colors that work in both themes
+  const panelBg = theme === 'dark' ? 'bg-white/5' : 'bg-black/5';
+  const panelBorder = theme === 'dark' ? 'border-white/10' : 'border-black/10';
+  const panelInner = theme === 'dark' ? 'bg-white/20' : 'bg-black/10';
 
   return (
     <section 
@@ -76,13 +69,15 @@ const HeroSection = () => {
       {/* Animated background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
-          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-[0.07] blur-3xl"
+          className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-3xl"
           style={{
-            background: `radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)`,
+            background: theme === 'dark' 
+              ? 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%)',
           }}
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.05, 0.08, 0.05],
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{
             duration: 8,
@@ -92,26 +87,33 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Floating content panels */}
+      {/* Floating content panels - visible in both themes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[0, 1, 2, 3].map((i) => (
+        {[
+          { pos: 'top-[20%] left-[5%]', size: 'w-64 h-48', delay: 0 },
+          { pos: 'top-[25%] right-[8%]', size: 'w-56 h-40', delay: 0.8 },
+          { pos: 'bottom-[25%] left-[10%]', size: 'w-48 h-36', delay: 1.6 },
+          { pos: 'bottom-[20%] right-[5%]', size: 'w-52 h-44', delay: 2.4 },
+        ].map((panel, i) => (
           <motion.div
             key={i}
-            className={`absolute rounded-xl bg-card/30 border border-border/30 backdrop-blur-sm ${
-              i === 0 ? 'top-1/4 left-[5%] w-64 h-48' :
-              i === 1 ? 'top-1/3 right-[8%] w-56 h-40' :
-              i === 2 ? 'bottom-1/4 left-[12%] w-48 h-36' :
-              'bottom-1/3 right-[5%] w-52 h-44'
-            }`}
-            variants={panelVariants}
-            initial="initial"
-            animate="animate"
-            custom={i}
+            className={`absolute ${panel.pos} ${panel.size} rounded-xl ${panelBg} border ${panelBorder} backdrop-blur-sm`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ 
+              opacity: [0.3, 0.6, 0.3],
+              y: [20, 0, -10, 0, 20],
+            }}
+            transition={{
+              duration: 6,
+              delay: panel.delay,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
           >
             <div className="p-4">
-              <div className="w-16 h-2 bg-muted rounded mb-3" />
-              <div className="w-full h-2 bg-muted/50 rounded mb-2" />
-              <div className="w-3/4 h-2 bg-muted/50 rounded" />
+              <div className={`w-16 h-2 ${panelInner} rounded mb-3`} />
+              <div className={`w-full h-2 ${panelInner} rounded mb-2 opacity-50`} />
+              <div className={`w-3/4 h-2 ${panelInner} rounded opacity-50`} />
             </div>
           </motion.div>
         ))}
@@ -149,13 +151,13 @@ const HeroSection = () => {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={currentIndex}
-                    className={`inline-block ${currentConcept.color}`}
-                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                    className={`inline-block font-semibold ${currentConcept.color}`}
+                    initial={{ opacity: 0, y: 15, filter: 'blur(8px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                    exit={{ opacity: 0, y: -15, filter: 'blur(8px)' }}
                     transition={{
                       type: 'spring',
-                      stiffness: 200,
+                      stiffness: 150,
                       damping: 20,
                     }}
                   >
@@ -168,7 +170,7 @@ const HeroSection = () => {
 
           {/* Value Statement */}
           <motion.div 
-            className="max-w-2xl mx-auto mb-12"
+            className="max-w-2xl mx-auto mb-10"
             variants={itemVariants}
           >
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-4">
@@ -183,7 +185,7 @@ const HeroSection = () => {
 
           {/* Topic indicators */}
           <motion.div 
-            className="flex justify-center gap-2 mb-12"
+            className="flex justify-center gap-2 mb-10"
             variants={itemVariants}
           >
             {concepts.map((_, index) => (
@@ -204,7 +206,7 @@ const HeroSection = () => {
 
           {/* CTAs */}
           <motion.div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
             variants={itemVariants}
           >
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -223,6 +225,11 @@ const HeroSection = () => {
                 </a>
               </Button>
             </motion.div>
+          </motion.div>
+
+          {/* Newsletter Signup */}
+          <motion.div variants={itemVariants} className="max-w-md mx-auto">
+            <NewsletterSignup variant="card" />
           </motion.div>
         </div>
       </motion.div>
