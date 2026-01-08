@@ -13,8 +13,14 @@ import {
   Heart,
   Star,
   CheckCircle2,
-  Lock
+  Lock,
+  FileText,
+  Search,
+  Edit3,
+  Send,
+  ArrowRight
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const contributorBenefits = [
   { icon: Award, title: 'Recognition', desc: 'Get credited for your contributions with author profiles and attribution.' },
@@ -24,10 +30,10 @@ const contributorBenefits = [
 ];
 
 const publishingProcess = [
-  { step: '01', title: 'Apply', desc: 'Submit your contributor application with sample work or experience.' },
-  { step: '02', title: 'Review', desc: 'Our editorial team reviews your application and provides feedback.' },
-  { step: '03', title: 'Draft', desc: 'Write your content following StackCraft quality guidelines.' },
-  { step: '04', title: 'Publish', desc: 'After editorial review, your content goes live with full attribution.' },
+  { step: '01', title: 'Apply', desc: 'Submit your contributor application with sample work or experience.', icon: FileText, color: 'from-blue-500 to-cyan-500' },
+  { step: '02', title: 'Review', desc: 'Our editorial team reviews your application and provides feedback.', icon: Search, color: 'from-violet-500 to-purple-500' },
+  { step: '03', title: 'Draft', desc: 'Write your content following StackCraft quality guidelines.', icon: Edit3, color: 'from-amber-500 to-orange-500' },
+  { step: '04', title: 'Publish', desc: 'After editorial review, your content goes live with full attribution.', icon: Send, color: 'from-emerald-500 to-green-500' },
 ];
 
 const guidelines = [
@@ -173,11 +179,11 @@ const Community = () => {
           </div>
         </section>
 
-        {/* Publishing Process */}
-        <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-          <div className="max-w-4xl mx-auto">
+        {/* Publishing Process - Animated Roadmap */}
+        <section className="container mx-auto px-4 sm:px-6 lg:px-8 mb-20 overflow-hidden">
+          <div className="max-w-5xl mx-auto">
             <motion.div 
-              className="text-center mb-12"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -190,27 +196,128 @@ const Community = () => {
               </p>
             </motion.div>
 
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-px bg-border hidden sm:block" />
+            {/* Horizontal Roadmap for desktop */}
+            <div className="hidden lg:block relative">
+              {/* Animated connecting line */}
+              <motion.div 
+                className="absolute top-16 left-[10%] right-[10%] h-1 bg-gradient-to-r from-blue-500 via-violet-500 via-amber-500 to-emerald-500 rounded-full"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: 'easeOut' }}
+                style={{ transformOrigin: 'left' }}
+              />
               
-              <div className="space-y-8">
+              <div className="grid grid-cols-4 gap-6 relative">
                 {publishingProcess.map((step, index) => (
                   <motion.div
                     key={step.step}
-                    className="relative flex gap-6 items-start"
-                    initial={{ opacity: 0, x: -20 }}
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 + 0.3, duration: 0.5 }}
+                  >
+                    {/* Animated circle with icon */}
+                    <motion.div
+                      className={`relative w-32 h-32 rounded-full bg-gradient-to-br ${step.color} p-[2px] mb-6`}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                    >
+                      <div className="w-full h-full rounded-full bg-background flex flex-col items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0, rotate: -180 }}
+                          whileInView={{ scale: 1, rotate: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.2 + 0.5, type: 'spring', stiffness: 200 }}
+                        >
+                          <step.icon className={`w-8 h-8 bg-gradient-to-br ${step.color} bg-clip-text`} style={{ color: index === 0 ? '#3b82f6' : index === 1 ? '#8b5cf6' : index === 2 ? '#f59e0b' : '#10b981' }} />
+                        </motion.div>
+                        <span className="text-xs font-mono text-muted-foreground mt-1">{step.step}</span>
+                      </div>
+                      
+                      {/* Pulse animation */}
+                      <motion.div
+                        className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-30`}
+                        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                      />
+                    </motion.div>
+                    
+                    {/* Arrow between steps */}
+                    {index < 3 && (
+                      <motion.div
+                        className="absolute top-14 text-muted-foreground"
+                        style={{ left: `${(index + 1) * 25 - 3}%` }}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.2 + 0.8 }}
+                      >
+                        <ArrowRight className="w-6 h-6" />
+                      </motion.div>
+                    )}
+                    
+                    <h3 className="text-xl font-semibold text-foreground mb-2">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Vertical Roadmap for mobile/tablet */}
+            <div className="lg:hidden relative">
+              {/* Animated vertical line */}
+              <motion.div 
+                className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 via-violet-500 via-amber-500 to-emerald-500 rounded-full"
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.5, ease: 'easeOut' }}
+                style={{ transformOrigin: 'top' }}
+              />
+              
+              <div className="space-y-12">
+                {publishingProcess.map((step, index) => (
+                  <motion.div
+                    key={step.step}
+                    className="relative flex gap-8 items-start"
+                    initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 }}
+                    transition={{ delay: index * 0.2, duration: 0.5 }}
                   >
-                    <div className="flex-shrink-0 w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center z-10">
-                      <span className="text-primary font-bold font-mono">{step.step}</span>
-                    </div>
-                    <div className="flex-1 pt-3">
+                    {/* Circle with icon */}
+                    <motion.div
+                      className={`relative flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br ${step.color} p-[2px] z-10`}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <div className="w-full h-full rounded-full bg-background flex items-center justify-center">
+                        <step.icon className="w-6 h-6" style={{ color: index === 0 ? '#3b82f6' : index === 1 ? '#8b5cf6' : index === 2 ? '#f59e0b' : '#10b981' }} />
+                      </div>
+                      
+                      {/* Pulse animation */}
+                      <motion.div
+                        className={`absolute inset-0 rounded-full bg-gradient-to-br ${step.color} opacity-30`}
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                      />
+                    </motion.div>
+                    
+                    {/* Content card */}
+                    <motion.div
+                      className="flex-1 p-6 rounded-xl bg-card border border-border"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                    >
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-xs font-mono px-2 py-1 rounded-full bg-muted text-muted-foreground">
+                          Step {step.step}
+                        </span>
+                      </div>
                       <h3 className="text-lg font-semibold text-foreground mb-1">{step.title}</h3>
-                      <p className="text-muted-foreground">{step.desc}</p>
-                    </div>
+                      <p className="text-sm text-muted-foreground">{step.desc}</p>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -303,10 +410,10 @@ const Community = () => {
               In the meantime, explore what's available today.
             </p>
             <Button variant="hero" size="xl" asChild>
-              <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
+              <Link to="/playbooks">
                 <BookOpen className="mr-2" />
                 Read the Playbooks
-              </a>
+              </Link>
             </Button>
           </div>
         </section>

@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import LoadingScreen from "@/components/LoadingScreen";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Roadmap from "./pages/Roadmap";
 import About from "./pages/About";
@@ -33,6 +34,7 @@ const AppContent = () => {
 
   return (
     <>
+      <ScrollToTop />
       <LoadingScreen isLoading={isLoading} />
       <Routes>
         <Route path="/" element={<Index />} />
