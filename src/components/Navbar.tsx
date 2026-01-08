@@ -1,11 +1,22 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import stackLogo from '@/assets/stack-dark.svg';
 
+interface NavLink {
+  label: string;
+  href: string;
+  type: 'link' | 'external' | 'scroll' | 'disabled';
+  target?: string;
+  badge?: string;
+}
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,30 +26,99 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Home', href: '#', type: 'scroll' },
+  const navLinks: NavLink[] = [
+    { label: 'Home', href: '/', type: 'link' },
     { label: 'Playbooks', href: 'https://blog.stackcraft.io', type: 'external' },
-    { label: 'Platform', href: '#platform', type: 'scroll' },
+    { label: 'Platform', href: '/#platform', type: 'scroll', target: 'platform' },
+    { label: 'Roadmap', href: '/roadmap', type: 'link' },
     { label: 'Learning', href: '#', type: 'disabled', badge: 'Coming Soon' },
-    { label: 'Community', href: '#community', type: 'scroll' },
-    { label: 'About', href: '#about', type: 'scroll' },
+    { label: 'Community', href: '/#community', type: 'scroll', target: 'community' },
   ];
 
-  const handleNavClick = (link: typeof navLinks[0], e: React.MouseEvent) => {
-    if (link.type === 'disabled') {
-      e.preventDefault();
-      return;
-    }
-    if (link.type === 'scroll') {
-      e.preventDefault();
-      if (link.href === '#') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        const element = document.querySelector(link.href);
-        element?.scrollIntoView({ behavior: 'smooth' });
-      }
+  const handleScrollNav = (target: string) => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: target } });
+    } else {
+      const element = document.getElementById(target);
+      element?.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
+  };
+
+  // Handle scroll after navigation
+  useEffect(() => {
+    const state = location.state as { scrollTo?: string } | null;
+    if (state?.scrollTo) {
+      setTimeout(() => {
+        const element = document.getElementById(state.scrollTo || '');
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
+
+  const renderNavLink = (link: NavLink, isMobile = false) => {
+    const baseClasses = isMobile
+      ? 'block px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg'
+      : 'px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg';
+
+    if (link.type === 'link') {
+      return (
+        <Link
+          key={link.label}
+          to={link.href}
+          onClick={() => setIsMobileMenuOpen(false)}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50`}
+        >
+          {link.label}
+        </Link>
+      );
+    }
+
+    if (link.type === 'external') {
+      return (
+        <a
+          key={link.label}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setIsMobileMenuOpen(false)}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50`}
+        >
+          {link.label}
+        </a>
+      );
+    }
+
+    if (link.type === 'scroll') {
+      return (
+        <button
+          key={link.label}
+          onClick={() => handleScrollNav(link.target || '')}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50 ${isMobile ? 'w-full text-left' : ''}`}
+        >
+          {link.label}
+        </button>
+      );
+    }
+
+    if (link.type === 'disabled') {
+      return (
+        <span
+          key={link.label}
+          className={`${baseClasses} text-muted-foreground/50 cursor-not-allowed flex items-center gap-2`}
+        >
+          {link.label}
+          {link.badge && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
+              {link.badge}
+            </span>
+          )}
+        </span>
+      );
+    }
+
+    return null;
   };
 
   return (
@@ -50,35 +130,13 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <a href="#" onClick={(e) => handleNavClick({ label: 'Home', href: '#', type: 'scroll' }, e)}>
+          <Link to="/">
             <img src={stackLogo} alt="StackCraft" className="h-8 lg:h-10" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => handleNavClick(link, e)}
-                target={link.type === 'external' ? '_blank' : undefined}
-                rel={link.type === 'external' ? 'noopener noreferrer' : undefined}
-                className={`px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
-                  link.type === 'disabled'
-                    ? 'text-muted-foreground/50 cursor-not-allowed'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  {link.label}
-                  {link.badge && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
-                      {link.badge}
-                    </span>
-                  )}
-                </span>
-              </a>
-            ))}
+            {navLinks.map((link) => renderNavLink(link))}
           </div>
 
           {/* Desktop CTA */}
@@ -103,29 +161,7 @@ const Navbar = () => {
         {isMobileMenuOpen && (
           <div className="lg:hidden border-t border-border animate-fade-in">
             <div className="py-4 space-y-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(link, e)}
-                  target={link.type === 'external' ? '_blank' : undefined}
-                  rel={link.type === 'external' ? 'noopener noreferrer' : undefined}
-                  className={`block px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg ${
-                    link.type === 'disabled'
-                      ? 'text-muted-foreground/50 cursor-not-allowed'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
-                  }`}
-                >
-                  <span className="flex items-center gap-2">
-                    {link.label}
-                    {link.badge && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
-                        {link.badge}
-                      </span>
-                    )}
-                  </span>
-                </a>
-              ))}
+              {navLinks.map((link) => renderNavLink(link, true))}
               <div className="pt-4 px-4">
                 <Button variant="navCta" className="w-full" asChild>
                   <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
