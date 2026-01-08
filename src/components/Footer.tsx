@@ -8,9 +8,9 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
-    { label: 'Contact', href: '#' },
+    { label: 'Privacy Policy', href: '/privacy', external: false },
+    { label: 'Terms of Service', href: '/terms', external: false },
+    { label: 'Contact', href: 'mailto:hello@stackcraft.io', external: true },
   ];
 
   return (
@@ -56,13 +56,23 @@ const Footer = () => {
           {/* Legal Links */}
           <div className="flex flex-wrap justify-center gap-6">
             {legalLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                {link.label}
-              </a>
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
         </div>

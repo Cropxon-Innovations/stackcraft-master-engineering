@@ -26,8 +26,8 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.3,
       },
     },
   };
@@ -44,15 +44,17 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
     },
   };
 
-  const iconVariants: Variants = {
-    hidden: { scale: 0.8, opacity: 0 },
+  const rectVariants: Variants = {
+    hidden: { scale: 0, rotate: -180, opacity: 0 },
     visible: {
       scale: 1,
+      rotate: 0,
       opacity: 1,
       transition: {
         type: 'spring' as const,
-        stiffness: 400,
-        damping: 25,
+        stiffness: 260,
+        damping: 20,
+        duration: 0.8,
       },
     },
   };
@@ -66,7 +68,7 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
         type: 'spring' as const,
         stiffness: 300,
         damping: 25,
-        delay: 0.4,
+        delay: 0.6,
       },
     },
   };
@@ -85,7 +87,6 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
         height={config.icon} 
         viewBox="0 0 48 48" 
         xmlns="http://www.w3.org/2000/svg"
-        variants={iconVariants}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -96,15 +97,9 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
           height="32" 
           rx="6" 
           fill={bgColor}
-          initial={{ scale: 0, rotate: -180 }}
-          animate={{ scale: 1, rotate: 0 }}
-          transition={{
-            type: 'spring' as const,
-            stiffness: 260,
-            damping: 20,
-          }}
+          variants={rectVariants}
         />
-        <motion.g variants={containerVariants}>
+        <motion.g>
           {/* Top bar - shortest */}
           <motion.rect
             x="16"
@@ -141,10 +136,9 @@ const AnimatedLogo = ({ className = '', size = 'md', showText = true }: Animated
       {/* Text */}
       {showText && (
         <motion.span
+          className="font-semibold text-foreground"
           style={{ 
             fontSize: config.text, 
-            color: textColor,
-            fontWeight: 600,
             fontFamily: 'Inter, system-ui, sans-serif',
           }}
           variants={textVariants}
