@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -29,37 +29,50 @@ const Navbar = () => {
 
   const navLinks: NavLink[] = [
     { label: 'Home', href: '/', type: 'link' },
-    { label: 'Playbooks', href: 'https://blog.stackcraft.io', type: 'external' },
-    { label: 'Platform', href: '/#platform', type: 'scroll', target: 'platform' },
+    { label: 'Playbooks', href: '/playbooks', type: 'link' },
+    { label: 'Platform', href: '/platform', type: 'link' },
     { label: 'About', href: '/about', type: 'link' },
-    { label: 'Community', href: '/#community', type: 'scroll', target: 'community' },
+    { label: 'Community', href: '/community', type: 'link' },
   ];
 
-  const handleScrollNav = (target: string) => {
+  const scrollToElement = useCallback((elementId: string, offset: number = 80) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  const handleScrollNav = useCallback((target: string) => {
     if (location.pathname !== '/') {
       navigate('/', { state: { scrollTo: target } });
     } else {
-      const element = document.getElementById(target);
-      element?.scrollIntoView({ behavior: 'smooth' });
+      scrollToElement(target);
     }
     setIsMobileMenuOpen(false);
-  };
+  }, [location.pathname, navigate, scrollToElement]);
 
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;
     if (state?.scrollTo) {
       setTimeout(() => {
-        const element = document.getElementById(state.scrollTo || '');
-        element?.scrollIntoView({ behavior: 'smooth' });
+        scrollToElement(state.scrollTo || '');
       }, 100);
       window.history.replaceState({}, document.title);
     }
-  }, [location]);
+  }, [location, scrollToElement]);
 
   const renderNavLink = (link: NavLink, isMobile = false) => {
     const baseClasses = isMobile
       ? 'block px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg'
-      : 'px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg';
+      : 'px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg relative group';
+
+    const isActive = location.pathname === link.href;
 
     if (link.type === 'link') {
       return (
@@ -67,9 +80,24 @@ const Navbar = () => {
           key={link.label}
           to={link.href}
           onClick={() => setIsMobileMenuOpen(false)}
-          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-muted/50`}
+          className={`${baseClasses} ${
+            isActive 
+              ? 'text-foreground bg-muted/50' 
+              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+          }`}
         >
           {link.label}
+          {!isMobile && (
+            <motion.span 
+              className="absolute bottom-0 left-1/2 h-0.5 bg-primary rounded-full"
+              initial={{ width: 0, x: '-50%' }}
+              animate={{ 
+                width: isActive ? '60%' : 0,
+                x: '-50%'
+              }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
         </Link>
       );
     }
