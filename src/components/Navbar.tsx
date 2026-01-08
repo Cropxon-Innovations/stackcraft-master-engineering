@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
-import stackLogo from '@/assets/stack-dark.svg';
+import AnimatedLogo from '@/components/AnimatedLogo';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface NavLink {
   label: string;
   href: string;
-  type: 'link' | 'external' | 'scroll' | 'disabled';
+  type: 'link' | 'external' | 'scroll';
   target?: string;
-  badge?: string;
 }
 
 const Navbar = () => {
@@ -30,7 +31,6 @@ const Navbar = () => {
     { label: 'Home', href: '/', type: 'link' },
     { label: 'Playbooks', href: 'https://blog.stackcraft.io', type: 'external' },
     { label: 'Platform', href: '/#platform', type: 'scroll', target: 'platform' },
-    { label: 'Roadmap', href: '/roadmap', type: 'link' },
     { label: 'About', href: '/about', type: 'link' },
     { label: 'Community', href: '/#community', type: 'scroll', target: 'community' },
   ];
@@ -45,7 +45,6 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Handle scroll after navigation
   useEffect(() => {
     const state = location.state as { scrollTo?: string } | null;
     if (state?.scrollTo) {
@@ -68,7 +67,7 @@ const Navbar = () => {
           key={link.label}
           to={link.href}
           onClick={() => setIsMobileMenuOpen(false)}
-          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50`}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-muted/50`}
         >
           {link.label}
         </Link>
@@ -83,7 +82,7 @@ const Navbar = () => {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setIsMobileMenuOpen(false)}
-          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50`}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-muted/50`}
         >
           {link.label}
         </a>
@@ -95,26 +94,10 @@ const Navbar = () => {
         <button
           key={link.label}
           onClick={() => handleScrollNav(link.target || '')}
-          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-secondary/50 ${isMobile ? 'w-full text-left' : ''}`}
+          className={`${baseClasses} text-muted-foreground hover:text-foreground hover:bg-muted/50 ${isMobile ? 'w-full text-left' : ''}`}
         >
           {link.label}
         </button>
-      );
-    }
-
-    if (link.type === 'disabled') {
-      return (
-        <span
-          key={link.label}
-          className={`${baseClasses} text-muted-foreground/50 cursor-not-allowed flex items-center gap-2`}
-        >
-          {link.label}
-          {link.badge && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
-              {link.badge}
-            </span>
-          )}
-        </span>
       );
     }
 
@@ -122,16 +105,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav
+    <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'nav-blur border-b border-border' : 'bg-transparent'
       }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/">
-            <img src={stackLogo} alt="StackCraft" className="h-8 lg:h-10" />
+          <Link to="/" className="flex-shrink-0">
+            <AnimatedLogo size="sm" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -139,8 +125,9 @@ const Navbar = () => {
             {navLinks.map((link) => renderNavLink(link))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
+          {/* Desktop Right Section */}
+          <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <Button variant="navCta" size="sm" asChild>
               <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
                 Read Playbooks
@@ -148,32 +135,43 @@ const Navbar = () => {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Right Section */}
+          <div className="lg:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden border-t border-border animate-fade-in">
-            <div className="py-4 space-y-1">
-              {navLinks.map((link) => renderNavLink(link, true))}
-              <div className="pt-4 px-4">
-                <Button variant="navCta" className="w-full" asChild>
-                  <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
-                    Read Playbooks
-                  </a>
-                </Button>
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              className="lg:hidden border-t border-border overflow-hidden"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="py-4 space-y-1">
+                {navLinks.map((link) => renderNavLink(link, true))}
+                <div className="pt-4 px-4">
+                  <Button variant="navCta" className="w-full" asChild>
+                    <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
+                      Read Playbooks
+                    </a>
+                  </Button>
+                </div>
               </div>
-            </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

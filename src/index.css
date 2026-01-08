@@ -6,6 +6,47 @@
 
 @layer base {
   :root {
+    /* Light theme */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens - Light */
+    --glow-primary: 217 91% 50%;
+    --surface-elevated: 0 0% 100%;
+    --text-primary: 222 47% 11%;
+    --text-secondary: 215 20% 35%;
+    --text-muted: 215 16% 47%;
+    --nav-blur-bg: 0 0% 100%;
+  }
+
+  .dark {
     --background: 220 20% 6%;
     --foreground: 210 40% 98%;
 
@@ -27,26 +68,20 @@
     --accent: 217 91% 60%;
     --accent-foreground: 220 20% 6%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 220 14% 18%;
     --input: 220 14% 18%;
     --ring: 217 91% 60%;
 
-    --radius: 0.75rem;
-
-    /* Custom tokens */
+    /* Custom tokens - Dark */
     --glow-primary: 217 91% 60%;
     --surface-elevated: 220 16% 12%;
     --text-primary: 210 40% 98%;
     --text-secondary: 215 20% 70%;
     --text-muted: 215 16% 50%;
-  }
-
-  .dark {
-    --background: 220 20% 6%;
-    --foreground: 210 40% 98%;
+    --nav-blur-bg: 220 20% 6%;
   }
 }
 
@@ -66,16 +101,6 @@
 }
 
 @layer components {
-  /* Gradient text effect */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      hsl(var(--foreground)) 0%,
-      hsl(var(--muted-foreground)) 100%
-    );
-  }
-
   /* Card glow effect */
   .card-glow {
     @apply relative overflow-hidden;
@@ -109,13 +134,13 @@
   /* Navigation blur effect */
   .nav-blur {
     @apply backdrop-blur-xl;
-    background: hsl(var(--background) / 0.8);
+    background: hsl(var(--nav-blur-bg) / 0.85);
   }
 
   /* Icon container */
   .icon-container {
     @apply flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300;
-    background: hsl(var(--surface-elevated));
+    background: hsl(var(--muted));
   }
 
   .icon-container:hover {
@@ -137,6 +162,16 @@
   /* Mono text */
   .mono {
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Theme toggle */
+  .theme-toggle {
+    @apply relative w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200;
+    background: hsl(var(--muted));
+  }
+
+  .theme-toggle:hover {
+    background: hsl(var(--muted-foreground) / 0.1);
   }
 }
 

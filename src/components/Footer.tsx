@@ -1,15 +1,50 @@
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
-  const links = [
+  const mainLinks = [
     { label: 'Playbooks', href: 'https://blog.stackcraft.io', external: true },
+    { label: 'Roadmap', href: '/roadmap', external: false },
+    { label: 'About', href: '/about', external: false },
+  ];
+
+  const legalLinks = [
     { label: 'Privacy', href: '#' },
     { label: 'Terms', href: '#' },
     { label: 'Contact', href: '#' },
   ];
 
   return (
-    <footer className="py-12 border-t border-border">
+    <footer className="py-12 border-t border-border bg-card/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-8">
+          {/* Main Links */}
+          <div className="flex flex-wrap justify-center gap-6">
+            {mainLinks.map((link) => (
+              link.external ? (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              )
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="w-24 h-px bg-border" />
+
           {/* Copyright */}
           <div className="text-center">
             <p className="text-foreground font-medium mb-1">© StackCraft</p>
@@ -18,15 +53,13 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Legal Links */}
           <div className="flex flex-wrap justify-center gap-6">
-            {links.map((link) => (
+            {legalLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
                 {link.label}
               </a>
