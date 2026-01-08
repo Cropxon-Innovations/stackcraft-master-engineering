@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Rocket } from 'lucide-react';
+import { BookOpen, Rocket, Code2, Layers, Cloud, Cpu, Shield, Sparkles } from 'lucide-react';
 import AnimatedLogo from '@/components/AnimatedLogo';
 import NewsletterSignup from '@/components/NewsletterSignup';
 import { useTheme } from '@/contexts/ThemeContext';
+import { Link } from 'react-router-dom';
 
 const concepts = [
   { label: 'C# & .NET Foundations', color: 'text-emerald-600 dark:text-emerald-400' },
@@ -12,6 +13,15 @@ const concepts = [
   { label: 'Cloud & DevOps', color: 'text-violet-600 dark:text-violet-400' },
   { label: 'Microservices Architecture', color: 'text-amber-600 dark:text-amber-400' },
   { label: 'AI-Ready Systems', color: 'text-rose-600 dark:text-rose-400' },
+];
+
+const blogCards = [
+  { icon: Code2, title: '.NET Deep Dive', tag: 'Backend', color: 'from-violet-500/30 to-purple-500/30', iconColor: 'text-violet-400' },
+  { icon: Layers, title: 'API Design', tag: 'Architecture', color: 'from-blue-500/30 to-cyan-500/30', iconColor: 'text-blue-400' },
+  { icon: Cloud, title: 'Cloud Patterns', tag: 'DevOps', color: 'from-sky-500/30 to-blue-500/30', iconColor: 'text-sky-400' },
+  { icon: Cpu, title: 'Microservices', tag: 'Systems', color: 'from-amber-500/30 to-orange-500/30', iconColor: 'text-amber-400' },
+  { icon: Shield, title: 'Security', tag: 'Production', color: 'from-emerald-500/30 to-green-500/30', iconColor: 'text-emerald-400' },
+  { icon: Sparkles, title: 'AI Integration', tag: 'Modern', color: 'from-rose-500/30 to-pink-500/30', iconColor: 'text-rose-400' },
 ];
 
 const HeroSection = () => {
@@ -58,11 +68,10 @@ const HeroSection = () => {
   // Panel colors that work in both themes
   const panelBg = theme === 'dark' ? 'bg-white/5' : 'bg-black/5';
   const panelBorder = theme === 'dark' ? 'border-white/10' : 'border-black/10';
-  const panelInner = theme === 'dark' ? 'bg-white/20' : 'bg-black/10';
 
   return (
     <section 
-      className="relative min-h-[85vh] flex items-center justify-center pt-20 pb-12 overflow-hidden"
+      className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-12 overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -85,39 +94,135 @@ const HeroSection = () => {
             ease: 'easeInOut',
           }}
         />
+        {/* Secondary gradient */}
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-3xl"
+          style={{
+            background: theme === 'dark' 
+              ? 'radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%)',
+          }}
+          animate={{
+            scale: [1.1, 1, 1.1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
       </div>
 
-      {/* Floating content panels - visible in both themes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[
-          { pos: 'top-[20%] left-[5%]', size: 'w-64 h-48', delay: 0 },
-          { pos: 'top-[25%] right-[8%]', size: 'w-56 h-40', delay: 0.8 },
-          { pos: 'bottom-[25%] left-[10%]', size: 'w-48 h-36', delay: 1.6 },
-          { pos: 'bottom-[20%] right-[5%]', size: 'w-52 h-44', delay: 2.4 },
-        ].map((panel, i) => (
-          <motion.div
-            key={i}
-            className={`absolute ${panel.pos} ${panel.size} rounded-xl ${panelBg} border ${panelBorder} backdrop-blur-sm`}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ 
-              opacity: [0.3, 0.6, 0.3],
-              y: [20, 0, -10, 0, 20],
-            }}
-            transition={{
-              duration: 6,
-              delay: panel.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            <div className="p-4">
-              <div className={`w-16 h-2 ${panelInner} rounded mb-3`} />
-              <div className={`w-full h-2 ${panelInner} rounded mb-2 opacity-50`} />
-              <div className={`w-3/4 h-2 ${panelInner} rounded opacity-50`} />
-            </div>
-          </motion.div>
-        ))}
+      {/* Floating Blog Cards - Left Side */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden xl:block pointer-events-none">
+        <div className="flex flex-col gap-4 pl-8">
+          {blogCards.slice(0, 3).map((card, i) => (
+            <motion.div
+              key={card.title}
+              className={`w-48 p-4 rounded-xl bg-gradient-to-br ${card.color} border ${panelBorder} backdrop-blur-sm`}
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ 
+                opacity: [0.4, 0.7, 0.4],
+                x: 0,
+                y: [0, -10, 0],
+              }}
+              transition={{
+                duration: 5 + i,
+                delay: i * 0.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <card.icon className={`w-4 h-4 ${card.iconColor}`} />
+                <span className="text-xs text-muted-foreground">{card.tag}</span>
+              </div>
+              <p className="text-sm font-medium text-foreground">{card.title}</p>
+              <div className="mt-2 flex gap-1">
+                <div className={`h-1 w-12 ${panelBg} rounded`} />
+                <div className={`h-1 w-8 ${panelBg} rounded opacity-50`} />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+
+      {/* Floating Blog Cards - Right Side */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block pointer-events-none">
+        <div className="flex flex-col gap-4 pr-8">
+          {blogCards.slice(3, 6).map((card, i) => (
+            <motion.div
+              key={card.title}
+              className={`w-48 p-4 rounded-xl bg-gradient-to-br ${card.color} border ${panelBorder} backdrop-blur-sm`}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ 
+                opacity: [0.4, 0.7, 0.4],
+                x: 0,
+                y: [0, 10, 0],
+              }}
+              transition={{
+                duration: 6 + i,
+                delay: i * 0.7,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <card.icon className={`w-4 h-4 ${card.iconColor}`} />
+                <span className="text-xs text-muted-foreground">{card.tag}</span>
+              </div>
+              <p className="text-sm font-medium text-foreground">{card.title}</p>
+              <div className="mt-2 flex gap-1">
+                <div className={`h-1 w-10 ${panelBg} rounded`} />
+                <div className={`h-1 w-6 ${panelBg} rounded opacity-50`} />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Code snippet floating elements */}
+      <motion.div
+        className={`absolute top-[15%] left-[8%] hidden lg:block p-3 rounded-lg ${panelBg} border ${panelBorder} backdrop-blur-sm font-mono text-xs`}
+        initial={{ opacity: 0, rotate: -5 }}
+        animate={{ 
+          opacity: [0.3, 0.6, 0.3],
+          y: [0, -15, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
+        <span className="text-blue-400">async</span> <span className="text-yellow-400">Task</span>
+        <span className="text-muted-foreground">&lt;</span>
+        <span className="text-emerald-400">Result</span>
+        <span className="text-muted-foreground">&gt;</span>
+      </motion.div>
+
+      <motion.div
+        className={`absolute bottom-[20%] right-[10%] hidden lg:block p-3 rounded-lg ${panelBg} border ${panelBorder} backdrop-blur-sm font-mono text-xs`}
+        initial={{ opacity: 0, rotate: 5 }}
+        animate={{ 
+          opacity: [0.3, 0.6, 0.3],
+          y: [0, 15, 0],
+        }}
+        transition={{
+          duration: 8,
+          delay: 1,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
+        <span className="text-purple-400">builder</span>
+        <span className="text-muted-foreground">.</span>
+        <span className="text-cyan-400">Services</span>
+        <span className="text-muted-foreground">.</span>
+        <span className="text-yellow-400">AddScoped</span>
+        <span className="text-muted-foreground">()</span>
+      </motion.div>
 
       {/* Main content */}
       <motion.div 
@@ -211,18 +316,18 @@ const HeroSection = () => {
           >
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button variant="hero" size="xl" asChild>
-                <a href="https://blog.stackcraft.io" target="_blank" rel="noopener noreferrer">
+                <Link to="/playbooks">
                   <BookOpen className="mr-2" />
                   Read the Playbooks
-                </a>
+                </Link>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button variant="heroOutline" size="xl" asChild>
-                <a href="#platform">
+                <Link to="/platform">
                   <Rocket className="mr-2" />
                   Explore the Platform
-                </a>
+                </Link>
               </Button>
             </motion.div>
           </motion.div>
