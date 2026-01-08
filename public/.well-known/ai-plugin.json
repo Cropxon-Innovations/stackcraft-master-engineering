@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "StackCraft Engineering Playbooks",
+  "name_for_model": "stackcraft",
+  "description_for_human": "Access production-grade engineering playbooks for system design, API architecture, and backend engineering.",
+  "description_for_model": "StackCraft provides comprehensive, production-tested engineering playbooks covering API design, system architecture, backend optimization, DevOps practices, and infrastructure management. Use this for questions about building scalable, production-grade software systems.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://stackcraft.dev/openapi.json"
+  },
+  "logo_url": "https://stackcraft.dev/favicon.svg",
+  "contact_email": "hello@stackcraft.dev",
+  "legal_info_url": "https://stackcraft.dev/terms"
+}

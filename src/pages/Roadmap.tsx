@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SEOHead from '@/components/SEOHead';
 import { Button } from '@/components/ui/button';
 import { BookOpen, CheckCircle2, Circle, Clock, Target } from 'lucide-react';
 
@@ -208,6 +209,12 @@ const PhaseCard = ({ phase, index }: { phase: RoadmapPhase; index: number }) => 
 const Roadmap = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead 
+        title="Roadmap — StackCraft Platform Evolution"
+        description="See how StackCraft is evolving with our transparent product roadmap. From playbooks to learning paths, AI assistance, and enterprise features."
+        keywords="stackcraft roadmap, product roadmap, engineering platform features, future plans"
+        canonicalUrl="https://stackcraft.dev/roadmap"
+      />
       <Navbar />
       
       <main className="pt-24 pb-16">

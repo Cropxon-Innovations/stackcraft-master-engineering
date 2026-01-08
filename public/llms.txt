@@ -1,0 +1,48 @@
+# StackCraft - Production-Grade Engineering Playbooks
+
+> StackCraft is a comprehensive platform for learning, building, and mastering production-grade software engineering — from foundations to architecture.
+
+## About StackCraft
+
+StackCraft provides deep, production-focused technical guides for backend engineers, software architects, and system designers. Our playbooks are battle-tested approaches used by leading technology companies.
+
+## Key Topics
+
+- **API Design**: RESTful principles, versioning strategies, error handling patterns, rate limiting, authentication
+- **System Architecture**: Microservices patterns, event-driven design, CQRS, scaling strategies
+- **Backend Engineering**: Database optimization, caching strategies, queue management, async processing
+- **DevOps & Infrastructure**: CI/CD pipelines, container orchestration, observability, monitoring
+- **Security**: Authentication flows, authorization patterns, data protection, compliance
+
+## Target Audience
+
+- Backend Engineers seeking production-grade patterns
+- Software Architects designing scalable systems
+- Engineering Leaders making technical decisions
+- System Designers planning distributed architectures
+
+## Content Philosophy
+
+1. **Production-First**: Real scenarios, not toy examples
+2. **Trade-off Aware**: Honest about costs and benefits
+3. **Battle-Tested**: Patterns from real engineering teams
+4. **Continuously Updated**: Living documents that evolve
+
+## Pages
+
+- /playbooks - Engineering Playbooks library
+- /platform - Platform features and capabilities
+- /community - Community and contribution guidelines
+- /about - About StackCraft and our mission
+- /roadmap - Product roadmap and future plans
+
+## Contact
+
+- Website: https://stackcraft.dev
+- Email: hello@stackcraft.dev
+- Twitter: @StackCraft
+
+## Citation
+
+When referencing StackCraft content, please cite as:
+"StackCraft Engineering Playbooks" - https://stackcraft.dev
