@@ -104,7 +104,7 @@ const Playbooks = () => {
         title="Engineering Playbooks — Deep Technical Guides"
         description="Production-tested engineering playbooks covering .NET, API design, system architecture, DevOps, and cloud infrastructure. Battle-tested patterns from real engineering teams."
         keywords=".NET engineering, API design, system architecture, DevOps playbooks, cloud infrastructure, backend engineering, microservices patterns"
-        canonicalUrl="https://stackcraft.dev/playbooks"
+        canonicalUrl="https://www.stackcraft.io/playbooks"
       />
       <Navbar />
 

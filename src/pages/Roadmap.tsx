@@ -213,7 +213,7 @@ const Roadmap = () => {
         title="Roadmap — StackCraft Platform Evolution"
         description="See how StackCraft is evolving with our transparent product roadmap. From playbooks to learning paths, AI assistance, and enterprise features."
         keywords="stackcraft roadmap, product roadmap, engineering platform features, future plans"
-        canonicalUrl="https://stackcraft.dev/roadmap"
+        canonicalUrl="https://www.stackcraft.io/roadmap"
       />
       <Navbar />
       

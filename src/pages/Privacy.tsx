@@ -9,7 +9,7 @@ const Privacy = () => {
         title="Privacy Policy"
         description="StackCraft privacy policy. Learn how we collect, use, and protect your personal information."
         keywords="privacy policy, data protection, personal information"
-        canonicalUrl="https://stackcraft.dev/privacy"
+        canonicalUrl="https://www.stackcraft.io/privacy"
       />
       <Navbar />
 

@@ -38,11 +38,11 @@ StackCraft provides deep, production-focused technical guides for backend engine
 
 ## Contact
 
-- Website: https://stackcraft.dev
-- Email: hello@stackcraft.dev
+- Website: https://www.stackcraft.io
+- Email: hello@stackcraft.io
 - Twitter: @StackCraft
 
 ## Citation
 
 When referencing StackCraft content, please cite as:
-"StackCraft Engineering Playbooks" - https://stackcraft.dev
+"StackCraft Engineering Playbooks" - https://www.stackcraft.io
