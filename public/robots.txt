@@ -1,5 +1,5 @@
 # StackCraft Robots.txt
-# https://stackcraft.dev/
+# https://www.stackcraft.io/
 
 # Allow all crawlers
 User-agent: *
@@ -82,7 +82,7 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://stackcraft.dev/sitemap.xml
+Sitemap: https://www.stackcraft.io/sitemap.xml
 
 # Host
-Host: https://stackcraft.dev
+Host: https://www.stackcraft.io

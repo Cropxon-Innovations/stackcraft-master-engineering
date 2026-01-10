@@ -90,7 +90,7 @@ const Platform = () => {
         title="Platform — Structured Learning for Production Engineering"
         description="Master production-grade engineering with structured learning paths, interactive content, AI-powered assistance, and a supportive community of engineers."
         keywords="engineering learning platform, structured learning paths, backend engineer training, software architecture courses, technical education"
-        canonicalUrl="https://stackcraft.dev/platform"
+        canonicalUrl="https://www.stackcraft.io/platform"
       />
       <Navbar />
 

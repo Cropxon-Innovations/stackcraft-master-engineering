@@ -9,7 +9,7 @@ const Terms = () => {
         title="Terms of Service"
         description="StackCraft terms of service. Read our terms and conditions for using the platform."
         keywords="terms of service, terms and conditions, user agreement"
-        canonicalUrl="https://stackcraft.dev/terms"
+        canonicalUrl="https://www.stackcraft.io/terms"
       />
       <Navbar />
 

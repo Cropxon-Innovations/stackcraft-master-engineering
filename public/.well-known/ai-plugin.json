@@ -9,9 +9,9 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://stackcraft.dev/openapi.json"
+    "url": "https://www.stackcraft.io/openapi.json"
   },
-  "logo_url": "https://stackcraft.dev/favicon.svg",
-  "contact_email": "hello@stackcraft.dev",
-  "legal_info_url": "https://stackcraft.dev/terms"
+  "logo_url": "https://www.stackcraft.io/favicon.svg",
+  "contact_email": "hello@stackcraft.io",
+  "legal_info_url": "https://www.stackcraft.io/terms"
 }

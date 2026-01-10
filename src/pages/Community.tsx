@@ -76,7 +76,7 @@ const Community = () => {
         title="Community — Contribute to Engineering Excellence"
         description="Join the StackCraft community of engineers. Contribute playbooks, get recognized for your expertise, and help thousands of developers build production-grade systems."
         keywords="engineering community, technical writing, open source contribution, developer community, engineering mentorship"
-        canonicalUrl="https://stackcraft.dev/community"
+        canonicalUrl="https://www.stackcraft.io/community"
       />
       <Navbar />
 

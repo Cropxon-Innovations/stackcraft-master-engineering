@@ -34,7 +34,7 @@ const About = () => {
         title="About StackCraft — Our Mission and Story"
         description="Learn about StackCraft's mission to build the engineering knowledge platform we wished existed. Deep focus on production-grade patterns and real-world engineering."
         keywords="about stackcraft, engineering education, software engineering mission, technical learning platform"
-        canonicalUrl="https://stackcraft.dev/about"
+        canonicalUrl="https://www.stackcraft.io/about"
       />
       <Navbar />
 
