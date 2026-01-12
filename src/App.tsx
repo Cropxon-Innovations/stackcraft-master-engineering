@@ -17,6 +17,7 @@ import Platform from "./pages/Platform";
 import Community from "./pages/Community";
 import Playbooks from "./pages/Playbooks";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Search from "./pages/Search";
 import NotFound from "./pages/NotFound";
 
@@ -49,7 +50,7 @@ const AppContent = () => {
         <Route path="/community" element={<Community />} />
         <Route path="/playbooks" element={<Playbooks />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/search" element={<Search />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

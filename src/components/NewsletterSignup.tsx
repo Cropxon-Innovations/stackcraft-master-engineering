@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { Mail, ArrowRight, Check, Loader2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const emailSchema = z.object({
   email: z.string()
@@ -17,9 +18,10 @@ const emailSchema = z.object({
 interface NewsletterSignupProps {
   variant?: 'inline' | 'card';
   className?: string;
+  source?: string;
 }
 
-const NewsletterSignup = ({ variant = 'card', className = '' }: NewsletterSignupProps) => {
+const NewsletterSignup = ({ variant = 'card', className = '', source = 'website' }: NewsletterSignupProps) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -39,20 +41,40 @@ const NewsletterSignup = ({ variant = 'card', className = '' }: NewsletterSignup
 
     setIsLoading(true);
 
-    // Simulate API call (replace with actual backend integration)
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const { error: dbError } = await supabase
+        .from('newsletter_subscribers')
+        .insert({ 
+          email: result.data.email.toLowerCase().trim(),
+          source 
+        });
 
-    setIsLoading(false);
-    setIsSuccess(true);
-    setEmail('');
+      if (dbError) {
+        if (dbError.code === '23505') {
+          // Unique constraint violation - email already exists
+          setError('This email is already subscribed!');
+          setIsLoading(false);
+          return;
+        }
+        throw dbError;
+      }
 
-    toast({
-      title: "You're on the list!",
-      description: "We'll notify you when early access opens.",
-    });
+      setIsSuccess(true);
+      setEmail('');
 
-    // Reset success state after a delay
-    setTimeout(() => setIsSuccess(false), 5000);
+      toast({
+        title: "You're on the list!",
+        description: "We'll notify you when new playbooks are published.",
+      });
+
+      // Reset success state after a delay
+      setTimeout(() => setIsSuccess(false), 5000);
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (variant === 'inline') {
