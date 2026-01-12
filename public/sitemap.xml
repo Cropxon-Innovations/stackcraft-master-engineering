@@ -4,11 +4,10 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage -->
+
   <url>
     <loc>https://www.stackcraft.io/</loc>
-    <lastmod>2026-01-10</lastmod>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -16,61 +15,126 @@
       <image:title>StackCraft - Production-Grade Engineering Playbooks</image:title>
     </image:image>
   </url>
-  
-  <!-- Playbooks -->
+
   <url>
-    <loc>https://www.stackcraft.io/playbooks</loc>
-    <lastmod>2026-01-10</lastmod>
+    <loc>https://www.stackcraft.io/about</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog</loc>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Platform -->
-  <url>
-    <loc>https://www.stackcraft.io/platform</loc>
-    <lastmod>2026-01-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Community -->
+
   <url>
     <loc>https://www.stackcraft.io/community</loc>
-    <lastmod>2026-01-10</lastmod>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- About -->
+
   <url>
-    <loc>https://www.stackcraft.io/about</loc>
-    <lastmod>2026-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.stackcraft.io/platform</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
-  
-  <!-- Roadmap -->
+
   <url>
-    <loc>https://www.stackcraft.io/roadmap</loc>
-    <lastmod>2026-01-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.stackcraft.io/playbooks</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
-  
-  <!-- Terms -->
-  <url>
-    <loc>https://www.stackcraft.io/terms</loc>
-    <lastmod>2026-01-10</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <!-- Privacy -->
+
   <url>
     <loc>https://www.stackcraft.io/privacy</loc>
-    <lastmod>2026-01-10</lastmod>
+    <lastmod>2026-01-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
+
+  <url>
+    <loc>https://www.stackcraft.io/roadmap</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/search</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/terms</loc>
+    <lastmod>2026-01-12</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://www.stackcraft.io/blog/production-grade-dotnet-api-design</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/microservices-architecture-patterns</loc>
+    <lastmod>2026-01-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/java-spring-boot-production-checklist</loc>
+    <lastmod>2026-01-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/kubernetes-devops-pipeline</loc>
+    <lastmod>2026-01-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/aws-cloud-architecture-best-practices</loc>
+    <lastmod>2026-01-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/llm-integration-patterns</loc>
+    <lastmod>2025-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/comprehensive-testing-strategy</loc>
+    <lastmod>2025-12-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.stackcraft.io/blog/graphql-api-design-guide</loc>
+    <lastmod>2025-12-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
+

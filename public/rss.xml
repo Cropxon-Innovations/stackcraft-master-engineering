@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>StackCraft Engineering Playbooks</title>
+    <link>https://www.stackcraft.io</link>
+    <description>Production-grade engineering playbooks covering AI, .NET, Java, DevOps, Cloud, System Architecture, Testing, and API Design. Battle-tested patterns from real engineering teams.</description>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 12 Jan 2026 08:00:00 GMT</lastBuildDate>
+    <pubDate>Sun, 12 Jan 2026 08:00:00 GMT</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://www.stackcraft.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://www.stackcraft.io/og-image.png</url>
+      <title>StackCraft</title>
+      <link>https://www.stackcraft.io</link>
+      <width>144</width>
+      <height>144</height>
+    </image>
+    <managingEditor>hello@stackcraft.io (StackCraft Team)</managingEditor>
+    <webMaster>hello@stackcraft.io (StackCraft Team)</webMaster>
+    <copyright>Copyright 2026 StackCraft. All rights reserved.</copyright>
+    <category>Technology</category>
+    <category>Software Engineering</category>
+    <category>Programming</category>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <generator>StackCraft RSS Generator</generator>
+
+    <item>
+      <title>Production-Grade .NET API Design Patterns</title>
+      <link>https://www.stackcraft.io/blog/production-grade-dotnet-api-design</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/production-grade-dotnet-api-design</guid>
+      <description>Learn battle-tested patterns for building scalable, maintainable APIs with ASP.NET Core. Covers versioning, error handling, authentication, and performance optimization.</description>
+      <pubDate>Fri, 10 Jan 2026 10:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>.NET</category>
+      <category>API Design</category>
+      <category>ASP.NET Core</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>Microservices Architecture: From Monolith to Distributed</title>
+      <link>https://www.stackcraft.io/blog/microservices-architecture-patterns</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/microservices-architecture-patterns</guid>
+      <description>A comprehensive playbook for designing, building, and operating microservices at scale. Includes service decomposition, communication patterns, and data management.</description>
+      <pubDate>Wed, 08 Jan 2026 12:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>Microservices</category>
+      <category>Architecture</category>
+      <category>Distributed Systems</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>Java Spring Boot Production Readiness Checklist</title>
+      <link>https://www.stackcraft.io/blog/java-spring-boot-production-checklist</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/java-spring-boot-production-checklist</guid>
+      <description>Essential checklist for deploying Spring Boot applications to production. Covers security, performance, monitoring, and operational excellence.</description>
+      <pubDate>Mon, 06 Jan 2026 14:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>Java</category>
+      <category>Spring Boot</category>
+      <category>Production</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>Building a Complete Kubernetes DevOps Pipeline</title>
+      <link>https://www.stackcraft.io/blog/kubernetes-devops-pipeline</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/kubernetes-devops-pipeline</guid>
+      <description>End-to-end guide for creating robust CI/CD pipelines with Kubernetes. GitOps, Helm, ArgoCD, and progressive delivery strategies.</description>
+      <pubDate>Sat, 04 Jan 2026 09:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>Kubernetes</category>
+      <category>DevOps</category>
+      <category>CI/CD</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>AWS Cloud Architecture Best Practices</title>
+      <link>https://www.stackcraft.io/blog/aws-cloud-architecture-best-practices</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/aws-cloud-architecture-best-practices</guid>
+      <description>Comprehensive guide to building well-architected solutions on AWS. Covers security, reliability, performance, cost optimization, and operational excellence.</description>
+      <pubDate>Thu, 02 Jan 2026 11:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>AWS</category>
+      <category>Cloud</category>
+      <category>Architecture</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>LLM Integration Patterns for Production Systems</title>
+      <link>https://www.stackcraft.io/blog/llm-integration-patterns</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/llm-integration-patterns</guid>
+      <description>Practical patterns for integrating Large Language Models into production applications. Covers prompt engineering, RAG, fine-tuning, and cost optimization.</description>
+      <pubDate>Sat, 28 Dec 2025 10:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>AI</category>
+      <category>LLM</category>
+      <category>Machine Learning</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>Comprehensive Testing Strategy for Modern Applications</title>
+      <link>https://www.stackcraft.io/blog/comprehensive-testing-strategy</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/comprehensive-testing-strategy</guid>
+      <description>Build a robust testing pyramid with unit, integration, and E2E tests. Covers TDD, BDD, contract testing, and performance testing.</description>
+      <pubDate>Thu, 25 Dec 2025 08:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>Testing</category>
+      <category>TDD</category>
+      <category>Quality</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+    <item>
+      <title>GraphQL API Design: The Complete Guide</title>
+      <link>https://www.stackcraft.io/blog/graphql-api-design-guide</link>
+      <guid isPermaLink="true">https://www.stackcraft.io/blog/graphql-api-design-guide</guid>
+      <description>Design and implement production-ready GraphQL APIs. Covers schema design, resolvers, authentication, subscriptions, and performance optimization.</description>
+      <pubDate>Sat, 20 Dec 2025 14:00:00 GMT</pubDate>
+      <dc:creator>StackCraft Team</dc:creator>
+      <category>GraphQL</category>
+      <category>API</category>
+      <category>Schema</category>
+      <media:content url="https://www.stackcraft.io/og-image.png" medium="image"/>
+    </item>
+
+  </channel>
+</rss>

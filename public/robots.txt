@@ -84,5 +84,8 @@ Allow: /
 # Sitemap
 Sitemap: https://www.stackcraft.io/sitemap.xml
 
+# RSS Feed
+# https://www.stackcraft.io/rss.xml
+
 # Host
 Host: https://www.stackcraft.io
